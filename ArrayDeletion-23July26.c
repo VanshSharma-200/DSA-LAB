@@ -1,14 +1,13 @@
 #include<stdio.h>
 void main(){
-    int n;
-    printf("enter size of arrr\n");
+    int n,pos;
+    printf("enter size of arrr: ");
     scanf("%d",&n);
     int arr[n];
-    printf("enter elements\n");
+    printf("enter elements: ");
     for(int i=0;i<n;i++)
         scanf("%d",&arr[i]);
-    printf("enter the pos to be deleted\n");
-    int pos;
+    printf("enter the pos to be deleted: ");
     scanf("%d",&pos);
     if(pos<1 || pos>n){
         printf("invalid pos\n");
