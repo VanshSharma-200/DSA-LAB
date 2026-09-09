@@ -26,13 +26,12 @@ struct node* insertBeginning(struct node *head, int data) {
 
     newNode->data = data;
     newNode->next = head;
-
-    head = newNode;
+    newNode = head;
 
     return head;
 }
 
-// Insertion at middle / given position
+// Insertion at middle
 struct node* insertMiddle(struct node *head, int data, int position) {
     struct node *newNode;
     struct node *temp;
@@ -111,7 +110,7 @@ void main() {
     struct node *temp = NULL;
     struct node *newNode = NULL;
 
-    // Creating the original linked list
+    // Creating the linked list
     while (choice == 1) {
 
         newNode = (struct node*)malloc(sizeof(struct node));
