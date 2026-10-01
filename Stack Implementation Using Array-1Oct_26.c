@@ -4,13 +4,13 @@
 int stack[MAX];
 int top = -1;
 
-void push(int value) {
+void push(int x) {
     if (top == MAX - 1) {
         printf("Stack Overflow!\n");
     } else {
         top++;
-        stack[top] = value;
-        printf("%d pushed into stack.\n", value);
+        stack[top] = x;
+        printf("%d pushed into stack.\n", x);
     }
 }
 
