@@ -1,52 +1,57 @@
 #include <stdio.h>
-#include <string.h>
+#define SIZE 100
 
-#define MAX 100
-
-char stack[MAX][MAX];
+char stack[SIZE][SIZE];
 int top = -1;
 
-void push(char* str) {
-    if (top < MAX - 1) strcpy(stack[++top], str);
-}
-
-void pop(char* str) {
-    if (top >= 0) strcpy(str, stack[top--]);
-}
-
-int is_alphanumeric(char ch) {
-    return ((ch >= 'a' && ch <= 'z') || 
-            (ch >= 'A' && ch <= 'Z') || 
-            (ch >= '0' && ch <= '9'));
-}
-
-void postfixToInfix(char* postfix, char* infix) {
+void copy(char a[], char b[]) {
     int i = 0;
-    char ch;
-    char op1[MAX], op2[MAX], temp[MAX];
+    while (b[i] != '\0') {
+        a[i] = b[i];
+        i++;
+    }
+    a[i] = '\0';
+}
 
-    while ((ch = postfix[i++]) != '\0') {
-        if (is_alphanumeric(ch)) {
-            temp[0] = ch;
+void push(char s[]) {
+    copy(stack[++top], s);
+}
+
+void pop(char s[]) {
+    copy(s, stack[top--]);
+}
+
+int isAlphaNum(char c) {
+    return ((c >= 'a' && c <= 'z') ||
+            (c >= 'A' && c <= 'Z') ||
+            (c >= '0' && c <= '9'));
+}
+
+void postfixToInfix(char postfix[], char infix[]) {
+    int i = 0;
+    char c, a[SIZE], b[SIZE], temp[SIZE];
+
+    while ((c = postfix[i++]) != '\0') {
+        if (isAlphaNum(c)) {
+            temp[0] = c;
             temp[1] = '\0';
             push(temp);
         } else {
-            pop(op2);
-            pop(op1);
-            sprintf(temp, "(%s%c%s)", op1, ch, op2);
+            pop(b);
+            pop(a);
+            sprintf(temp, "(%s%c%s)", a, c, b);
             push(temp);
         }
     }
+
     pop(infix);
 }
 
-int main() {
-    char postfix[MAX] = "abcd^e-fgh*+^*+i-";
-    char infix[MAX];
+void main() {
+    char postfix[] = "ab+c*";
+    char infix[SIZE];
 
     postfixToInfix(postfix, infix);
-    printf("Postfix: %s\n", postfix);
-    printf("Infix:   %s\n", infix);
 
-    return 0;
-}
+    printf("Postfix: %s\n", postfix);
+    printf("Infix: %s\n", infix);}
